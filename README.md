@@ -316,26 +316,25 @@ uv run pytest tests/ -v
 
 ---
 
-## 12. Deploying the Frontend (Netlify)
+## 12. Deploying the Frontend (Vercel)
 
-1. In `front-end/.env.example`, copy to `.env` and set:
-   ```
-   VITE_API_BASE_URL=https://your-bayaan-backend.onrender.com
-   ```
+The frontend is fully configured for Vercel with SPA rewrite rules in `front-end/vercel.json`.
 
-2. Go to [netlify.com](https://netlify.com) → **Add new site → Import from Git**.
+1. Go to **[vercel.com](https://vercel.com)** and sign in with your GitHub account.
+2. Click **"Add New..."** → **"Project"**.
+3. Import your repository: `ayanahmad-4/Baayan`.
+4. In the project configuration screen:
+   - **Framework Preset**: Vite
+   - **Root Directory**: Click "Edit" and choose `front-end`
+   - **Build Command**: `npm run build` (detected automatically)
+   - **Output Directory**: `dist` (detected automatically)
+5. Expand **Environment Variables** and add:
+   - **Name**: `VITE_API_BASE_URL`
+   - **Value**: `https://your-bayaan-backend.onrender.com` (your deployed Render API URL from Step 11)
+6. Click **Deploy**.
+7. Vercel will deploy your app and give you a URL like `https://baayan-frontend.vercel.app` (or whatever project name you choose).
 
-3. Set the following in Netlify settings:
-   - **Base directory**: `front-end`
-   - **Build command**: `npm run build`
-   - **Publish directory**: `front-end/dist`
-
-4. Add Environment Variable in Netlify dashboard:
-   ```
-   VITE_API_BASE_URL = https://your-bayaan-backend.onrender.com
-   ```
-
-5. Deploy. The `netlify.toml` already includes the SPA redirect rule.
+*(Optional: If you prefer Netlify instead, point Base directory to `front-end`, Build command to `npm run build`, Publish directory to `front-end/dist`, and add `VITE_API_BASE_URL` in Netlify environment variables.)*
 
 ---
 
@@ -344,10 +343,10 @@ uv run pytest tests/ -v
 After deploying both services, update the backend's `ALLOWED_ORIGINS` environment variable in Render:
 
 ```
-ALLOWED_ORIGINS=https://bayaan.netlify.app,https://my-portfolio-saa.netlify.app
+ALLOWED_ORIGINS=https://baayan-frontend.vercel.app,https://my-portfolio-saa.netlify.app
 ```
 
-Replace `bayaan.netlify.app` with your actual Netlify URL. Never use `*` (wildcard) with credentials.
+Replace `baayan-frontend.vercel.app` with your actual Vercel domain. Never use `*` (wildcard) with credentials.
 
 ---
 
