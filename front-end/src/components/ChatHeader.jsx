@@ -18,7 +18,7 @@ export function ChatHeader({ connectionStatus, onReset }) {
         </div>
         <div>
           <div className="chat-header__title">Bayaan</div>
-          <div className="chat-header__subtitle">AI assistant for Ayan Ahmad</div>
+          <div className="chat-header__subtitle">AI assistant for Syed Ayan Ahmad</div>
         </div>
       </div>
 
