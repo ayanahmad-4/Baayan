@@ -1,0 +1,18 @@
+# Render deployment configuration
+services:
+  - type: web
+    name: bayaan-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn back-end.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-20b
+      - key: RESUME_PATH
+        value: back-end/data/resume.pdf
+      - key: ALLOWED_ORIGINS
+        value: https://bayaan.netlify.app,https://my-portfolio-saa.netlify.app
+      - key: RATE_LIMIT_REQUESTS
+        value: "30"
